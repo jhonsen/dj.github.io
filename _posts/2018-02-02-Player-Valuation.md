@@ -67,7 +67,7 @@ Despite the less-than-optimal performance, I decided to use the linear regressio
 
 The linear regression model is fairly effective for predicting players' salaries (**Figure 4**). The prediction (orange line) seems to capture the bulk distribution of players' salary ranging from 0 to ~2 million USD. However, it shows weaker predictive power for higher-income players receiving ~4-8 million USD. The model's tendency to predict lower salary is most likely influenced by the skewed distributions observed in the *features*. Even though various transformations were applied, many of those *features*  had outliers at or near zeros (data not shown). Overall, the curent model has an (RMSE) error of ~1 million USD, which is fairly substantial for (rookie) players.  
 
-![Fig.4]({{site.url}}/images/ytest_ypred_density.png) 
+![Fig.4]({{site.url}}/images/ytest_ypred_histo_kde.png) 
 
 **Figure 4**. Predicted and true target values in the test set. Predicted- and true salary are illustrated using kernel density estimation, which estimates the probability density function. The horizontal (x-axis) represents salary distribution in the test set, whereas vertical (y-axis) shows the probability density of a given salary.      
 
