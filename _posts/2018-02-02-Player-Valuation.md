@@ -27,17 +27,17 @@ The scope of my project was limited to 3 types of offensive positions: quarterba
 
 2. *Four years of performance measures*  - represent position-specific yardage (Yds) and touchdowns (TD), accumulated by each player within the first 4 years of his career.  Web-scraping these datasets turned out to be quite involved, because the metrics are position-dependent. For instance, the total passing Yds and -TD for the year 2012 (1st-), 2013 (2nd-), 2014 (3rd-), and 2015 (4th-year) were collected for a rookie QB that entered the NFL in 2012 (*see* **Figure 1**). This acquisition process was applied to each of the 3 different positions. Namely, passing, rushing and receiving Yds (or TD) were extracted for QB, RB, and WR, respectively. 
 
-   ![Fig.1](/Users/jhonsen/Documents/DS/dsProjects/Blogs/jhonsen.github.io/_posts/%7B%7B%20site.url%20%7D%7D/images/concat1.png)
+   ![Fig.1]({{site.url}}/images/concat1.png)
 
    **Figure 1**. Workflow of data acquisition. Inset illustrates data collection required for a single class of rookie QB entering the NFL in 2012. 
 
-3. The *4th year* base salary of each player - was used as the *target* for my model (*see* **Figure 1**). I chose to use this 4th-year information, so that I coul limit my analysis to "active" players (or still playing in the league at their 4th-year) like Russell Wilson. So, I collected players' salary over the last 15 years (2003-2018). Additionally, I adjusted each year's salary with the annual inflation [rate](https://www.usinflationcalculator.com/inflation/historical-inflation-rates/), to reflect a value that is equivalent to 2018.
+3. The *4th year* base salary of each player - was used as the *target* for my model (*see* **Figure 1**). I chose to use this 4th-year information, so that I could limit my analysis to "active" players (or still playing in the league at their 4th-year) like Russell Wilson. So, I collected players' salary over the last 15 years (2003-2018). Additionally, I adjusted each year's salary with the annual inflation [rate](https://www.usinflationcalculator.com/inflation/historical-inflation-rates/), to reflect a value that is equivalent to 2018.
 
    
 
 #### Data Wrangling and Feature Engineering
 
-With the workflow described above, I ended up collecting 45 dataframes (i.e., 15 per position), representing 15 years of performance data. At this point, I couldn't immediately combine all of these dataframes into one, as these stats correspond to different positions. For instance, rushing Yards are not identical to passing Yds nor receiving Yds. So, I decided to create a metric that is relevant to different positions. Namely, I chose to use a standard Yahoo fantasy football point systems to reflect every player's annual performance:
+With the workflow described above, I ended up collecting 45 dataframes (i.e., 15 per position), representing 15 years of performance data. At this point, I couldn't immediately combine all of these dataframes into one, as these stats correspond to different positions. For instance, rushing Yards are not identical to passing Yds nor receiving Yds. So, I decided to create a metric that is relevant to different positions. In this case, I chose to use a standard Yahoo fantasy football point system to reflect every player's annual performance:
 
 - For RB,  1 point for every 10 rushing yards, and 6 points for every TD
 - For WR, 1 point for every 10 receiving yards, and 6 points for every TD
@@ -49,11 +49,11 @@ After transforming players' Yds & TD into points, I joined the 45 dataframes int
 
 #### Regression Models and Analysis
 
-After cleaning my dataset and filtering out "non-active" players (i.e., those who don't get paid on the 4th year), I ended up with 356 rows of players and 11 features. (Btw, it's quite remarkable to see that almost 70% of new players entering the NFL don't last 4 years). The 11 features include ...(**Figure 2**). 
+After cleaning my dataset and filtering out "non-active" players (i.e., those who don't get paid on the 4th year), I ended up with 356 rows of players and 11 features. (Btw, it's quite remarkable to see that almost 70% of new players entering the NFL don't last 4 years). The 11 features I included in the model are draft status, draft round, weight, height, 40-yard dash, 4 years of performance points (i.e., Year1, Year2, Year3, and Year4), and positions (RB or WR) (**Figure 2**). 
 
-![Fig.2]({{site.url}}/images/dataframe.png)
+![Fig.2]({{site.url}}/images/dataframesample.png)
 
-**Figure 2.** Dataframe containing 356 players and 11 features. Player names are excluded in the regression models. 
+**Figure 2.** A sample observation from the dataframe containing 11 features. Player names are excluded in the regression models. 
 
 Prior to building a regression model, I split the dataframe into training (80%) and testing (20%) sets. With the training set, I built a pipeline that performs feature scaling and 10-fold CV on  `LinearRegression`, `Ridge`, `Lasso`, `ElasticNet`. (Regularization parameters for Ridge, Lasso and ElasticNet were obtained using  `LassoCV`, `RidgeCV`, and `ElasticNetCV`). As a first stab of model selection, I also included tree-based regressors:`RandomForestRegressor`, `DecisionTreeRegressor`, and`BaggingRegressor`, *out-of the-box* (or without any hyperparametric tuning).
 
@@ -61,7 +61,7 @@ The result of 10-fold CV on each of the regressors was not as optimal as I had a
 
 ![Fig.3]({{site.url}}/images/Alg_comparison_RMSE.png)
 
-**Figure 3**. Ten-fold cross-validated model-performance on the training set.
+**Figure 3**. Model-performance on the training set, based on 10-fold CV. Jittered points reflect errors on each fold.
 
 Despite the less-than-optimal performance, I decided to use the linear regression model, without regularizations, to predict players' salary on the test set. I chose this simple model for its interpretability, which would be most useful for NFL managers as they assess their players.  
 
@@ -71,7 +71,7 @@ The linear regression model is fairly effective for predicting players' salaries
 
 **Figure 4**. Predicted and true target values in the test set. Predicted- and true salary are illustrated using kernel density estimation, which estimates the probability density function. The horizontal (x-axis) represents salary distribution in the test set, whereas vertical (y-axis) shows the probability density of a given salary.      
 
-Once I trained my linear regressor on the entire training set, I then input Russell Wilson's stats to obtain his predicted salary. The result suggests that an NFL player with his performances stats should receive ~2.6 million USD. This value is way higher than Wilson's actual pay (<1 million/year). Even when the prediction error (~1 million) is considered, Wilson's value should be around ~1.6 million USD. So, I would contend that (indeed) the Seahawks got a very good deal by signing Wilson with a 4-year contract for only ~3 million USD. In other words, given his performance, *Russell Wilson could (should) have been paid more than he actually got*.   
+Once I trained my linear regressor on the entire training set, I then insert Russell Wilson's stats into my model, to obtain his predicted salary. The result suggests that an NFL player with his performances stats should receive ~2.6 million USD. This value is way higher than Wilson's actual pay (<1 million/year). Even when the prediction error (~1 million) is considered, Wilson's value should be around ~1.6 million USD. So, I would contend that (indeed) the Seahawks got a very good deal by signing Wilson with a 4-year contract for only ~3 million USD. In other words, given his performance, *Russell Wilson could (should) have been paid more than he actually got*.   
 
  
 
