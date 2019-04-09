@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Predicting Obesity Based on Day-to-Day Life Choices
+title: What Can Changes Can We Make Today To Avoid Obesity?
 ---
 
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Estimating the Value of NFL Players Based on Early Career Performance Stats
+title: Was Russell Wilson Underpaid?
 ---
 
 
