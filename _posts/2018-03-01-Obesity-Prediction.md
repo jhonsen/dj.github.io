@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Predicting Obesity Based on Day-to-Day Lifestyle Choices
+title: Predicting Obesity Based on Day-to-Day Life Choices
 ---
 
 
 
-# Predicting Obesity Based on Lifestyle Choices
+# Predicting obesity based on lifestyle habits
 
 #### Introduction
 
@@ -64,17 +64,19 @@ Although the RF classifier is known to be a robust model with high predictive po
 
 In conclusion, using RF and LIME together to predict the chances of obesity seems to be an appropriate approach, as this combination provides both predictive power and interpretability.   
 
+ 
+
 
 #### Future work
 
-- *Model improvement*. Interpretability is an important issue in healthcare industry, as we need to be able to explain to clients how a particular action/habit may give a certain outcome. Consquently, implementing a simple interpretable model like logistic regression would be suitable. So, exploring feature engineering for a logistic model would be one option that I'd like to investigate in the future. In particular, I'd be interested in applying various feature transformations, (especially) because the variables were not normally distributed. I'd like to also see the impact of adding more features to the current model (only 5 were considered at this point). Alternatively, I'd like to explore other combinations of LIME and ensemble models, to get a better predictive power yet maintain some of the explainable aspect.   
+ - *Model improvement*. Interpretability is an important issue in healthcare industry, as we need to be able to explain to clients how a particular action/habit may give a certain outcome. Consquently, implementing a simple interpretable model like logistic regression would be suitable. So, exploring feature engineering for a logistic model would be one option that I'd like to investigate in the future. In particular, I'd be interested in applying various feature transformations, (especially) because the variables were not normally distributed. I'd like to also see the impact of adding more features to the current model (only 5 were considered at this point). Alternatively, I'd like to explore other combinations of LIME and ensemble models, to get a better predictive power yet maintain some of the explainable aspect.   
 
-- *Collect more data*. Currently, only 6-years worth of data is available, spanning from 2006 to 2008 and from 2014 to 2016. I'd like to collect more data (as they become available) and retrain my model. I'd also be interested in looking at non-survey data from elsewhere, as this current project hinges upon an _assumption_ that the experimental data is reliable. In other words, I had assumed that people who were surveyed woud answer those questions accurately. In reality, I'd suspect that there would be some inconsistencies, i.e., people could be forgetful, or feel apprehensive about sharing (private) information, etc. Furthermore, the current survey questions were focused on individuals' habits over the past 7 days, which may not be a representative of a person's "true" lifestyle. For instance, an obese individual who happened to have started a new diet & exercise routine (during the surveyed week) would have answered these questions in a way that reflects his/her "new" lifestyle, as opposed to the previous one. Lastly, I'd like to try using other metrics to reflect obesity. The *target* response used for this model is based on BMI, which may not be indicative of obesity. For instance, someone who has a great body mass (e.g., a crossfitter or bodybuilder) is typically considered obese, based on BMI. So playing around with this target measure may give a more insightful outcome.             ​     
----
+ - *Collect more data*. Currently, only 6-years worth of data is available, spanning from 2006 to 2008 and from 2014 to 2016. I'd like to collect more data (as they become available) and retrain my model. I'd also be interested in looking at non-survey data from elsewhere, as this current project hinges upon an _assumption_ that the experimental data is reliable. In other words, I had assumed that people who were surveyed woud answer those questions accurately. In reality, I'd suspect that there would be some inconsistencies, i.e., people could be forgetful, or feel apprehensive about sharing (private) information, etc. Furthermore, the current survey questions were focused on individuals' habits over the past 7 days, which may not be a representative of a person's "true" lifestyle. For instance, an obese individual who happened to have started a new diet & exercise routine (during the surveyed week) would have answered these questions in a way that reflects his/her "new" lifestyle, as opposed to the previous one. Lastly, I'd like to try using other metrics to reflect obesity. The *target* response used for this model is based on BMI, which may not be indicative of obesity. For instance, someone who has a great body mass (e.g., a crossfitter or bodybuilder) is typically considered obese, based on BMI. So playing around with this target measure may give a more insightful outcome.             ​     
 #### Data sources and tools used
 - Data acquisition: `Postgresql`, `csvkit`
 - Data analysis: `Pandas`, `seaborn`, `LIME`
 - Models: `scikit-learn` (i.e., Logistic Regression & Random Forest)
 - Model deployment: `D3`, `Flask`, hosted on `Heroku`
+
 ---
 

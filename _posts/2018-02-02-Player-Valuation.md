@@ -1,6 +1,6 @@
 ---
 layout: post
-title: NFL-Players Valuation
+title: Estimating the Value of NFL Players Based on Early Career Performance Stats
 ---
 
 
