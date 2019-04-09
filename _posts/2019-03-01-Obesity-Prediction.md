@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What Can Changes Can We Make Today To Avoid Obesity?
+title: What Life Changes Can We Make Today To Avoid Obesity?
 ---
 
 
