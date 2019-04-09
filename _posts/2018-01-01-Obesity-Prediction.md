@@ -46,7 +46,7 @@ In general, the performance of Logistic Regression (LR) is comparable with that 
 
 In general, the two models perform similarly on the _test set_. Similar AUC scores (~0.69) were obtained by LR and RF (**Figure 2**).  
 
-  ![Figure2]({{site.url}}images/ROCcurveTEST.png)
+  ![Figure2]({{site.url}}/images/ROCcurveTEST.png)
 
   **Figure 2.** ROC curves of the LR and RF classifiers. Curves were generated with predicted and true target values of the test set. Diagonal dashed line indicates random chance. 
 
