@@ -74,7 +74,7 @@ The term _data science_ itself was not even popular until the past 5-6 years. Si
   
 
 **Data Sources and Tools Used**
-- [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+- Articles from [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
 - Data acquisition: `PetScan`, `wikipediaapi`
 - NLP and data analysis: `Pandas`, `seaborn`, `nltk`
 - Unsupervised learning: `Scikit-learn`, `TruncatedSVD`,   `nmf`, `kmeans`
