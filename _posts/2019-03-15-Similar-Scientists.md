@@ -37,25 +37,25 @@ The application of NMF to the document-to-term matrix resulted in 9 distinct top
 
 Based on these descriptions, Topic-**2**, **-4**, and **-8** are _not real scientists_. Articles assigned to these topics must have been included in the acquisition process, as they have some relationships on some level with other articles categorized under `Category:scientists`  (described above). Topic-**5** (European) includes repeated keywords of months e.g., april, march, february, etc., corresponding to people's date of births in the wikipedia summaries. (Additional text preprocessing may fix this issue and provide a better model) 
 
-![Figure1]({{site.url}}/images/wordclouds.png)
+![Fig1]({{site.url}}/images/wordclouds.png)
 
 **Figure 1**. Top 8 keywords appearing in each of the nine modeled topics. Clouds created manually on powerpoint, to avoid redundant and repetitive words. Variation in font sizes were added for visual effects, but it does not reflect the word's frequency in the documents.        
 
 The distribution of topics in the dataset is illustrated using t-SNE representation (**Figure 2**). A given article is assigned to a single topic, based on its highest topic probability. Distances in the hyperdimensional space is also reflected in this 2D projection, i.e., points that are close to each other correspond to similar documents. 
 
-  ![Figure2]({{site.url}}/images/nmf_tsne.png)
+  ![Fig2]({{site.url}}/images/nmf_tsne.png)
 
   **Figure 2.** t-SNE representation of various articles about scientists in different domains, archived in Wikipedia. Each point corresponds to an article (i.e., scientist) and the assigned color reflects its highest probability for a given topic.  
 
 Data scientists are included in the computer scientist group. In particular, Hadley Wickham's description in wikipedia is considered by the model as a computer scientist (gray), with high similarity with other scientists in academia (blue) (**Figure 3**). As it turns out Hadley Wickham - a famous data scientist - is also an adjunct professor in Auckland, New Zealand. Hence, Wickham's position near the academic group in the t-SNE plot seems reasonable.    
 
-  ![Figure3]({{site.url}}/images/computersScientists.png)
+  ![Fig3]({{site.url}}/images/computersScientists.png)
 
   **Figure 3**. t-SNE representation of wikipedia articles about scientists related to academia (blue) and to computer science (gray). Each point corresponds to an article (i.e., scientist) and the assigned color reflects the highest probability for the assigned topic. 
 
 The 10 articles that are most similar to Hadley Wickham is shown in **Table 1**. Based on cosine similarity, articles that are closely related to Hadley Wickham include computer/data scientists, as well as others in academia. These similarities are reflected by the close proximity of the corresponding points in the t-SNE representation (**Figure 3**).
 
-![Figure3]({{site.url}}/images/Hadley.png)
+![Fig4]({{site.url}}/images/Hadley.png)
 
 **Table 1**. List of top 10 most related scientists to Hadley Wickham, based on wikipedia summaries. Each row corresponds to an observation, i.e., transformed vector for a scientist. Values in each column represent elements in the vector, expressed in percentages. For each observation, the topic assigned in t-SNE (Figure 3) reflects the highest percentage among the 9 topics.  
 
