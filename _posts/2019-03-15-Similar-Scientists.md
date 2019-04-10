@@ -63,7 +63,7 @@ The 10 articles that are most similar to Hadley Wickham is shown in **Table 1**.
 This NLP project was really fun to work on, as it attempts to answer a question that is pertinent and common to people who are entering data science, i.e.,
 -  _How should I tell my story about how I transitioned into data science?_   
 
-The term _data science_ itself was not even popular until the past 5-6 years. Since then its popularity has only increased higher and higher. On a daily basis, many people with diverse backgrounds are trying to get into this ever expanding field of data. The answer to the question above could be pertinent to recruiters and companies who are looking to hire data scientists. The outcome of this study may provide a path towards a nice sweet spot where employers and potential employees can meet each others' expectations. 
+The term _data science_ itself didn't become popular until the past 5-6 years. Since then, its popularity has only increased exponentially. On a daily basis, people with diverse backgrounds are striving to enter the ever expanding field of data. The answer to the question above could also be pertinent to recruiters and companies who are looking to hire data scientists. My hope is that, the outcome of this study may provide a path towards a sweet spot, where employers and potential employees can meet each others' expectations. 
 
 #### Future work
 
