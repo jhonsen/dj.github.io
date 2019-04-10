@@ -49,7 +49,7 @@ The distribution of topics in the dataset is illustrated using t-SNE representat
 
 Data scientists are included in the computer scientist group. In particular, Hadley Wickham's description in wikipedia is considered by the model as a computer scientist (gray), with high similarity with other scientists in academia (blue) (**Figure 3**). As it turns out Hadley Wickham - a famous data scientist - is also an adjunct professor in Auckland, New Zealand. Hence, Wickham's position near the academic group in the t-SNE plot seems reasonable.    
 
-  ![Fig3]({{site.url}}/images/computersScientists.png)
+  ![Fig3]({{site.url}}/images/computersScientists-2.png)
 
   **Figure 3**. t-SNE representation of wikipedia articles about scientists related to academia (blue) and to computer science (gray). Each point corresponds to an article (i.e., scientist) and the assigned color reflects the highest probability for the assigned topic. 
 
