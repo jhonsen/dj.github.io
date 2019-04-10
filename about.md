@@ -4,27 +4,23 @@ title: About
 ---
 
 <p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
+  Welcome!   
+
+  This is my story of entering world of DATA.
+
+  I am data scientist with a background in chemistry research. I was trained in both experimental techniques and computational approaches, to solve molecular structures and infer their functions. As an experimentalist, I analyzed protein structures using solid-state nuclear magnetic resonance spectroscopy (a branch of analytical techniques that deals with extracting signals from noise). As a computational chemist, I built molecular models of the proteins and simulated their behaviors using packages that run on Linux clusters and supercomputers. 
+  These data-driven research eventually led me to the world of data science (DS) and machine learning (ML).  
+  
+  After graduate school, I decided to hone my analytical & coding skills by attending a (fulltime) 12-week DS bootcamp in Seattle, i.e., METIS. At the bootcamp, I completed five end-to-end projects that focused on real-world business problems that intersect multiple industries, e.g., healthcare, marketing, sports analytics. 
+
+  Currently, I'm also in pursue of a _data engineering_ nanodegree (via UDACITY), to support my adventures through this exciting world of DATA.
+
 </p>
 
-In the novel, *The Strange Case of Dr. Jekyll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
 
-There are currently two themes built on Poole:
+Let's keep in touch:
+- Connect with me on [LinkedIn](https://www.linkedin.com/in/jhonsen/) or [Twitter](https://twitter.com/Jhonsen_dj)  
+- Checkout my projects in [GitHub](https://github.com/jhonsen).
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
 
-Checkout repos and contribute on [GitHub](https://github.com/jhonsen).
-
-## Setup
-
-Some fun facts about the setup of this project include:
-
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!
+Thanks for visiting!
