@@ -1,0 +1,82 @@
+---
+layout: post
+title: What Should a Data Scientist's LinkedIn Summary Look Like?
+---
+
+# Finding Related Scientists with Natural Language Processing
+  
+#### Introduction
+
+This post is a summary of the natural language processing (NLP) project I worked on during my time at METIS [data science bootcamp](https://www.thisismetis.com/data-science-bootcamps). Coming from an academic background, I was interested in seeing how other data scientists (with similar academic background) describe themselves on LinkedIn. 
+
+LinkedIn is the number one social media platform that is used by professionals to network with each other. This plaftorm also provides individuals a way to showcase their work experiences, abilities, and expertise. In some ways, these information could be used by job recruiters to assess fitness for a given job position. In such a case, _how should a data scientist transitioning from academia to industry write his/her LinkedIn bio?_ 
+
+#### Overview of data acquisition, pre-processing, and unsupervised learning
+Due to legal issues surrounding [scraping LinkedIn](https://techcrunch.com/2016/08/15/linkedin-sues-scrapers/), I decided to use summaries of scientists that are archived on wikipedia. These articles were collected using [wikipediaapi](https://pypi.org/project/Wikipedia-API/), which collects one title at a time. I created a (for-loop) function to iterate this process over a list of titles, generated from [PETSCAN](https://petscan.wmflabs.org/). To collect this list, articles with **Category: Scientists** (at depth:2) were requested; PETSCAN returned ~15,000 articles under this category. A variety of related articles were also collected during this acquisition, and these articles may not describe _"real"_ scientists. For example, 'Data' - a Star Trek character - was also included in this **Scientists** group.  
+
+Once I finished collecting 1-2-paragraph-summaries of these scientists, I preprocessed this corpus by removing duplicates and dropping easily recognized, unrelated entries. Dropping some of the _"not real scientist"_-articles ended up reducing the total number of summaries down to ~13,000 (a more extensive cleaning is necessary to remove all unrelated articles).
+
+To convert each wikipedia summary into a document-to-term vector, I applied a Term Frequency-Inverse Document Frequency (TF-IDF) vectorizer, removed (english) stopwords & punctuations, and included tri-grams.  This process resulted in a matrix with ~13,000 rows and ~1.2 million features (words) for the entire corpus.
+
+I then applied Non-negative Matrix Factorization (NMF) to reduce the matrix dimension and to model the appropriate topics describing these documents. Nine topics seemed reasonable, as the top keywords appearing in each topic seem to convey distinct ideas from another. 
+
+Subsequently, I used cosine similarity to find the closest neighbor between a given a query (or a wikipedia summary of a given scientist) and other articles in the corpus. Vectors with cosine similarity values approaching 1.0 indicate articles that are most similar to the given query. 
+
+#### Topic Modeling Result    
+
+The application of NMF to the document-to-term matrix resulted in 9 distinct topics modeled (**Figure 1**).  Based on the keywords, these topics seem to describe  scientists that relate to:
+  1. Academia
+  2. Comic books (*)
+  3. Indian origin
+  4. Fictional characters (*)
+  5. European origin
+  6. Russian origin
+  7. Computer Science (data scientists included)
+  8. TV characters (*)
+  9. Physicists  
+
+Based on these descriptions, Topic-**2**, **-4**, and **-8** are _not real scientists_. Articles assigned to these topics must have been included in the acquisition process, as they have some relationships on some level with other articles categorized under `Category:scientists`  (described above). Topic-**5** (European) includes repeated keywords of months e.g., april, march, february, etc., corresponding to people's date of births in the wikipedia summaries. (Additional text preprocessing may fix this issue and provide a better model) 
+
+![Figure1]({{site.url}}/images/wordclouds.png)
+
+**Figure 1**. Top 8 keywords appearing in each of the nine modeled topics. Clouds created manually on powerpoint, to avoid redundant and repetitive words. Variation in font sizes were added for visual effects, but it does not reflect the word's frequency in the documents.        
+
+The distribution of topics in the dataset is illustrated using t-SNE representation (**Figure 2**). A given article is assigned to a single topic, based on its highest topic probability. Distances in the hyperdimensional space is also reflected in this 2D projection, i.e., points that are close to each other correspond to similar documents. 
+
+  ![Figure2]({{site.url}}/images/nmf_tsne.png)
+
+  **Figure 2.** t-SNE representation of various articles about scientists in different domains, archived in Wikipedia. Each point corresponds to an article (i.e., scientist) and the assigned color reflects its highest probability for a given topic.  
+
+Data scientists are included in the computer scientist group. In particular, Hadley Wickham's description in wikipedia is considered by the model as a computer scientist (gray), with high similarity with other scientists in academia (blue) (**Figure 3**). As it turns out Hadley Wickham - a famous data scientist - is also an adjunct professor in Auckland, New Zealand. Hence, Wickham's position near the academic group in the t-SNE plot seems reasonable.    
+
+  ![Figure3]({{site.url}}/images/computersScientists.png)
+
+  **Figure 3**. t-SNE representation of wikipedia articles about scientists related to academia (blue) and to computer science (gray). Each point corresponds to an article (i.e., scientist) and the assigned color reflects the highest probability for the assigned topic. 
+
+The 10 articles that are most similar to Hadley Wickham is shown in **Table 1**. Based on cosine similarity, articles that are closely related to Hadley Wickham include computer/data scientists, as well as others in academia. These similarities are reflected by the close proximity of the corresponding points in the t-SNE representation (**Figure 3**).
+
+![Figure3]({{site.url}}/images/Hadley.png)
+
+**Table 1**. List of top 10 most related scientists to Hadley Wickham, based on wikipedia summaries. Each row corresponds to an observation, i.e., transformed vector for a scientist. Values in each column represent elements in the vector, expressed in percentages. For each observation, the topic assigned in t-SNE (Figure 3) reflects the highest percentage among the 9 topics.  
+
+#### Summary and Conclusion
+This NLP project was really fun to work on, as it attempts to answer a question that is pertinent and common to people who are entering data science, i.e.,
+-  _How should I tell my story about how I transitioned into data science?_   
+
+The term _data science_ itself was not even popular until the past 5-6 years. Since then its popularity has only increased higher and higher. On a daily basis, many people with diverse backgrounds are trying to get into this ever expanding field of data. The answer to the question above could be pertinent to recruiters and companies who are looking to hire data scientists. The outcome of this study may provide a path towards a nice sweet spot where employers and potential employees can meet each others' expectations. 
+
+#### Future work
+
+- *More cleaning and collecting quality data targeting the data science field* . At the current stage, the data is still messy! There's quite a handful of _"fake"_ scientists, which are  'fictional', 'comic', and 'TV' characters that appear in the topics. It would be nice if LinkedIn data is freely available. The number of data scientists in wikipedia is also limited. Hence, the model coulndt distinguish a data scientist vs. a computer scientist. It would be interesting to combine this text exploration with a supervised learning project that classifies whether a person categorized as a computer/data scientist (on LinkedIn) actually works as a data scientist.    
+
+- *Automated text generation*. In a distant future, it would be exciting to create a deep learning model that generates a full description about someone, given specific attribute about him/her as _seed_.                    
+
+  
+
+**Data Sources and Tools Used**
+- [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+- Data acquisition: `PetScan`, `wikipediaapi`
+- NLP and data analysis: `Pandas`, `seaborn`, `nltk`
+- Unsupervised learning: `Scikit-learn`, `TruncatedSVD`,   `nmf`, `kmeans`
+- Data visualization: `t-SNE` and `U-MAP` 
+- Model deployment: `D3`, `Flask`, hosted on `Heroku` (in development)
