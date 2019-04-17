@@ -65,6 +65,10 @@ This NLP project was really fun to work on, as it attempts to answer a question 
 
 The term _data science_ itself didn't become popular until the past 5-6 years. Since then, its popularity has only increased exponentially. On a daily basis, people with diverse backgrounds are striving to enter the ever expanding field of data. The answer to the question above could also be pertinent to recruiters and companies who are looking to hire data scientists. My hope is that, the outcome of this study may provide a path towards a sweet spot, where employers and potential employees can meet each others' expectations. 
 
+![TableauFig]({{site.url}}/images/Final_onTableau.png)
+  
+**Checkout the Tableau dashboard** in real-time [here](https://public.tableau.com/profile/jhonsen.djajamuliadi#!/vizhome/TSNE/Dashboard1)
+    
 #### Future work
 
 - *More cleaning and collecting quality data targeting the data science field* . At the current stage, the data is still messy! There's quite a handful of _"fake"_ scientists, which are  'fictional', 'comic', and 'TV' characters that appear in the topics. It would be nice if LinkedIn data is freely available. The number of data scientists in wikipedia is also limited. Hence, the model coulndt distinguish a data scientist vs. a computer scientist. It would be interesting to combine this text exploration with a supervised learning project that classifies whether a person categorized as a computer/data scientist (on LinkedIn) actually works as a data scientist.    
