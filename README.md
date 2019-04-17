@@ -1,1 +1,1 @@
-#### Source code for my data science blog, [Data Joint](http://jhonsen.github.io) 
+#### Source code for my data science blog, [Data Joint](http://jhonsen.github.io/archive/) 
