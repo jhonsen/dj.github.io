@@ -5,7 +5,7 @@ title: Was Russell Wilson Underpaid?
 
 
 
-# Predicting NFL Player Salary Based on Early Career Perfomance    
+### Project Goal: Predicting NFL Player Salary Based on Early Career Perfomance    
 
 #### Introduction
 

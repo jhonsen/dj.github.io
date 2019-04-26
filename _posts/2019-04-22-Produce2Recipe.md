@@ -3,9 +3,9 @@ layout: post
 title: What Should I Cook Tonight? 
 ---
 
-# Building `Produce2Recipe`: _a Phone App that finds cooking recipes from photos of vegetables_
+### Project Goal: Building `Produce2Recipe` ~ _a Phone App that finds cooking recipes from photos of vegetables_
 
-## Introduction
+#### Introduction
 
 Have you ever looked at the vegetables in your refrigerator and wondered, "What can I cook with these?" 
 
@@ -15,7 +15,7 @@ So, I thought to myself, *"Wouldn't it be nice to use my phone to take photos of
 
  ![VID]({{site.url}}/images/Project4_P2R_action.gif)
 
-Creating a functional product within 3 weeks was not an easy task, as it required some engineering of different datasets. For instance, I had to collect and manage 2 types of datasets (i.e., images and texts), and I had to pre-process them separately. I also had to build an image classifier that is robust enough, to recognize vegetable photos taken using my phone camera. Then, the image classifier had to be fed into a document of recipes (i.e., corpus) which I wanted to apply natural language processing (NLP) to. In detail, here is my list of high-level objectives I needed to accomplish: 
+**Challenges and Objectives**. Creating a functional product within 3 weeks was not an easy task, as it required some engineering of different datasets. For instance, I had to collect and manage 2 types of datasets (i.e., images and texts), and I had to pre-process them separately. I also had to build an image classifier that is robust enough, to recognize vegetable photos taken using my phone camera. Then, the image classifier had to be fed into a document of recipes (i.e., corpus) which I wanted to apply natural language processing (NLP) to. In detail, here is my list of high-level objectives I needed to accomplish: 
 
 - [x] Collect recipes (text data) by web-scraping cooking sites (e.g., _Epicurious_). Include details such as titles, ingredients, cooking instructions, nutritional values, and photos during web-scraping
 
@@ -37,7 +37,7 @@ The following figure illustrates my project design and the technology stack I us
 
 
 
-## Part I. Data acquisition and pre-processing
+#### Part I. Data acquisition and pre-processing
 
 **Collecting images**. Using `google-image-download` API, I collected 300 images for 15 different vegetable types (a total of ~4500 images). Then, I manually inspected each image to make sure that I acquired the right type of vegetable. For instance, I wanted to make sure that I collected photos of (raw) potatoes, not _mashed potatoes_, often included in the search process. I also removed duplicate images from each collection of produce. 
 
@@ -54,7 +54,7 @@ After removing duplicates and unrelated images, some collections had fewer than 
 
 
 
-## Part II. Building an image classifier and modeling recipe topics    
+#### Part II. Building an image classifier and modeling recipe topics    
 
 **Building an image classifier**. As I only had 3 weeks to complete this project, I chose to use transfer learning to classify produce images. I used some of the popular convolutional neural network (CNN) architectures as the base layer and trained the top layer with produce images in the training set. I also wrote a Python script that runs a grid-search to find the best combination of model parameters. The result indicates that the best combination uses *MobileNetV2*, *rmsprop* optimizer and *softmax* activation function. 
 
@@ -70,7 +70,7 @@ Google's [MobileNet_V2 architecture](https://ai.googleblog.com/2018/04/mobilenet
 
 
 
-## Part III. Creating a phone app prototype     
+#### Part III. Creating a phone app prototype     
 
 To simulate a functioning phone app (shown in demo), I did 3 things:
 
@@ -91,7 +91,7 @@ Thank you for reading! Additional details and codes can be found in my [repo](ht
 
    
 
-## Future work
+#### Future work
 
 - *Larger database and broader scope*. Epicurious only has ~38k recipes on its database, and many of them are missing info that I wanted to use for my project (like nutritional values). In the future, I'd like to webscrape several websites and build a bigger recipe-corpus.  Thus far, I've built a model that classifies 12 different vegetables, which I often keep in my refrigerator. Considering that my accuracy is ~96% for these 12 classes, I'd like to add more vegetable classes, as well as adding fruits. I'd also like to incorporate the *ketogenic-diet*-friendly option; I had made a function for it, but decided to abandon it to make the app prototype simpler. 
 

@@ -5,7 +5,7 @@ title: What Life Changes Can We Make Today To Avoid Obesity?
 
 
 
-# Predicting obesity based on lifestyle habits
+### Project Goal: Predicting obesity based on lifestyle habits
 
 #### Introduction
 
@@ -43,7 +43,7 @@ To have models with high interpretability and predictive power, I used `Logistic
 For the app deployment, the entire dataset was used for training. The trained model was embedded in a Python `Flask` app, which utilizes `d3.js` sliders as input method. Visit this [page](https://obesity-predictor.herokuapp.com/) for deployed app.
  ![Figure0]({{site.url}}/images/shortervid.gif)
 
-In general, the performance of Logistic Regression (LR) is comparable with that of Random Forest (RF) classfier (**Figure 1**). The LR model has a slightly higher <u>accuracy</u> than RF. However, the <u>recall score</u> for RF is better than that of LR. The latter is of great importance in healthcare, as <u>it would be costly to misclassify someone who has an obesity-related disease as healthy</u>. That was the reason I chose Random Forest Classifier as the best model to use for deployment.
+**Performance Evaluation**. In general, the performance of Logistic Regression (LR) is comparable with that of Random Forest (RF) classfier (**Figure 1**). The LR model has a slightly higher <u>accuracy</u> than RF. However, the <u>recall score</u> for RF is better than that of LR. The latter is of great importance in healthcare, as <u>it would be costly to misclassify someone who has an obesity-related disease as healthy</u>. That was the reason I chose Random Forest Classifier as the best model to use for deployment.
    ![Figure1]({{site.url}}/images/GridoptimizedModels.png)
 
   **Figure 1**. Performance of Logistic Regression and Random Forest classifiers on the training set. Hyper-parameters used in each model were optimezed using grid-search-CV. *Left*, the accuracy of each model was computed with 10-fold CV. *Right*, recall score was also obtained with 10-fold cross-validation. Jittered points on box-and-whiskers reflect scores for each of the ten folds.      
@@ -60,7 +60,7 @@ Higher <u>recall</u> score in the RF classifier means that we are better at dete
 
   **Figure 3**. Confusion matrices for LR and RF classifiers. These diagrams were generated using true and predicted target values of the test set.  
 
-Although the RF classifier is known to be a robust model with high predictive power, it is a "black-box"-like model due to its low interpretability. To recover some of this aspect, I decided to use Local Interpretable Model-agnostic Explainer ([LIME]((https://github.com/marcotcr/lime))). This package allows us to investigate the effect of feature-variation on the prediction result. For instance, a given individual is predicted to be obese by the RF classifier, with  P(obese) of 0.59 (*left* of **Figure 4**). We could calculate how the P(obese) changes with the increase of a particular feature, or a combination of features. For this subject, the individual did not participate in any type of exercises, i.e. **0** *exerciseFrequency* (*right*). However, if a physician were to suggest an exercise plan for this individual, just by including 4 times a week (i.e., increasing *exerciseFrequency* from **0** to **4**), then the P(obese) would decrease to 0.56, indicating that this person would have lower chances of becoming obese. This type of calculation can be performed for each feature, or any combinations of features, at any increments. LIME outputs the overall effect of feature changes on the prediction probabilities  (*middle* of figure). 
+**Recovering Model Interpretability**. Although the RF classifier is known to be a robust model with high predictive power, it is a "black-box"-like model due to its low interpretability. To recover some of this aspect, I decided to use Local Interpretable Model-agnostic Explainer ([LIME]((https://github.com/marcotcr/lime))). This package allows us to investigate the effect of feature-variation on the prediction result. For instance, a given individual is predicted to be obese by the RF classifier, with  P(obese) of 0.59 (*left* of **Figure 4**). We could calculate how the P(obese) changes with the increase of a particular feature, or a combination of features. For this subject, the individual did not participate in any type of exercises, i.e. **0** *exerciseFrequency* (*right*). However, if a physician were to suggest an exercise plan for this individual, just by including 4 times a week (i.e., increasing *exerciseFrequency* from **0** to **4**), then the P(obese) would decrease to 0.56, indicating that this person would have lower chances of becoming obese. This type of calculation can be performed for each feature, or any combinations of features, at any increments. LIME outputs the overall effect of feature changes on the prediction probabilities  (*middle* of figure). 
 
   ![Fig4]({{site.url}}/images/LIME.png)
 
