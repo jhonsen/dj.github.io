@@ -3,13 +3,14 @@ layout: post
 title: What Should a Data Scientist's LinkedIn Summary Look Like?
 ---
 
-### Project Goal: Finding Related Scientists with Natural Language Processing
+> ## Project Goal
+> - Finding Related Scientists with Natural Language Processing
 
-#### Introduction
+### Introduction
 
 This post is a summary of the natural language processing (NLP) project I worked on during my time at [Metis data science bootcamp](https://www.thisismetis.com/data-science-bootcamps). Coming from an academic background, I was interested in seeing how other data scientists from academia describe themselves on LinkedIn. In such a case, _how should a data scientist transitioning from academia to industry write his/her LinkedIn bio?_ 
 
-#### Project Overview
+### Project Overview
 
 **Data acquisition**. Due to legal issues surrounding [scraping LinkedIn](https://techcrunch.com/2016/08/15/linkedin-sues-scrapers/), I used summaries of scientists archived on wikipedia. These articles were gathered using [wikipediaapi](https://pypi.org/project/Wikipedia-API/), which collects one title at a time. I created a (for-loop) function to iterate this process over a list of titles, generated from [PETSCAN](https://petscan.wmflabs.org/). To collect this list, articles with *Category: Scientists* (at depth:2) were requested; PETSCAN returned ~15,000 articles under this category. A variety of related articles were also collected during this acquisition, and these articles may not describe _"real"_ scientists. For example, 'Data' - a Star Trek character - was also included in this **Scientists** group.  
 
@@ -21,7 +22,7 @@ To convert each wikipedia summary into a document-to-term vector, I applied a Te
 
 Subsequently, I used cosine similarity to find the closest neighbor between a given a query. Vectors with cosine similarity values approaching 1.0 indicate articles that were most similar to the given query. 
 
-#### Topic Modeling Result    
+### Topic Modeling Result    
 
 The application of NMF to the document-to-term matrix resulted in 9 distinct topics modeled (**Figure 1**).  Based on the keywords, these topics seemed to describe scientists that related to:
   1. Academia
@@ -68,7 +69,7 @@ The term _data science_ itself didn't become popular until the past 5-6 years. S
 
 **Checkout the Tableau dashboard** in real-time [here](https://public.tableau.com/profile/jhonsen.djajamuliadi#!/vizhome/TSNE/Dashboard1)
     
-#### Future work
+### Future work
 
 - *More cleaning and collecting quality data targeting the data science field*. At the current stage, the data is still messy! There's quite a handful of _"fake"_ scientists, which are  'fictional', 'comic', and 'TV' characters that appear in the topics. It would be nice if LinkedIn data was legally available. The number of data scientists in wikipedia is also limited. Hence, the model could not distinguish a data scientist vs. a computer scientist. It would be interesting to combine this text exploration with a supervised learning project that classifies whether a person categorized as a computer/data scientist (on LinkedIn) actually works as a data scientist.    
 

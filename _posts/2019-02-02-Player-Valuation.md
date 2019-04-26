@@ -5,9 +5,10 @@ title: Was Russell Wilson Underpaid?
 
 
 
-### Project Goal: Predicting NFL Player Salary Based on Early Career Perfomance    
+> ## Project Goal
+> - Predicting NFL Player Salary Based on Early Career Perfomance    
 
-#### Introduction
+### Introduction
 
 This project was completed during my third week at Metis [data science bootcamp](https://www.thisismetis.com/data-science-bootcamps). Based on the curriculum, the focus of this project were web-scraping and linear regression models. Unlike the first project, this one was completed individually, i.e., I had the opportunity to determine the scope of the project and to design a way to collect-, clean-, and analyze the data. To this end, I decided to focus my work on NFL analytics. 
 
@@ -15,11 +16,11 @@ Having recently moved to Seattle (for the bootcamp), it was the perfect time for
 
 In my attempt to answer this question, I wanted to find the value of a player with respect to their early NFL career performance
 
-#### Project Description and Approach
+### Project Description and Approach
 
 Each player that is drafted into the NFL typically gets a 4-year contract deal (1st-round players get a [5th year option](https://www.sbnation.com/nfl/2018/4/30/17171726/nfl-rookie-wage-scale-draft)). Under this contract, a player is unable to renegotiate his salary, even if he excels beyond the franchise's expectations. Given a set of performance measures, what would be the *"market value"* ($$$) of a player, e.g., on their 4th year?
 
-#### Data Acquisition
+### Data Acquisition
 
 The scope of my project was limited to 3 types of offensive positions: quarterbacks (QB), running backs (RB), and wide receivers (WR). My approach in assessing players' early career performance was to collect data that describe their (1) _draft worthiness_, (2) their _first four years of performance stats_, (3) and their _4th year salary_. These data were webscraped using `beautifulsoup` and `selenium` from [pro-football-reference](http://pro-football-reference.com/) and [spotrac](https://www.spotrac.com/nfl/rankings/2003/base/). The gruesome details of webscraping and preprocessing are described elsewhere, and the codes are available in my [repo](https://github.com/jhonsen/NFLplayersValuation). Briefly,
 
@@ -35,7 +36,7 @@ The scope of my project was limited to 3 types of offensive positions: quarterba
 
      
 
-#### Data Wrangling and Feature Engineering
+### Data Wrangling and Feature Engineering
 
 With the workflow described above, I ended up collecting 45 dataframes (i.e., 15 per position), representing 15 years of performance data. However, I couldn't directly combine all of these dataframes into one table, as the stats correspond to different positions. For instance, the value of rushing Yards may not be identical with passing Yds, nor receiving Yds. So, I decided to normalize the weight of Yds and TDs for each of these different positions using a standard Yahoo fantasy football point system:
 
@@ -47,7 +48,7 @@ With the workflow described above, I ended up collecting 45 dataframes (i.e., 15
 After transforming players' Yds & TDs into points, I merged the 45 dataframes together into a single table. Categorical features (such as *position* and *draft status*) were one-hot encoded, and one of each of these category-columns was dropped, to avoid the dummy variable trap. Some features were also tranformed using the log1p or box-cox or Yeo-Johnson method. Many of these features were largely skewed to the right, as rookie players often make little impact in their first 4 years of NFL career.
 
 
-#### Regression Models and Analysis
+### Regression Models and Analysis
 
 After cleaning my dataset and removing "non-active" players (i.e., those who didn't get paid on their 4th year), I ended up with 356 rows of players and 11 features. (By the way, it was quite remarkable to see that almost 70% of new players entering the NFL didn't last 4 years). The 11 features I included in my model were draft status, draft round, weight, height, 40-yard dash, 4 years of performance points (i.e., Year1, Year2, Year3, and Year4), and positions (RB or WR) (**Figure 2**). 
 
@@ -75,7 +76,7 @@ Once I optimized my linear regressor on the training set, I used it to predict R
 
  
 
-#### Summary and Future Work
+### Summary and Future Work
 
 As it turns out, this classic "moneyball" problem (though successful in MLB) may not be as trivial to achieve in the NFL. At the moment, my model only considers features that are related directly to the individuals, i.e., their performance stats and NFL combine results. However, I believe there are other factors that could affect the value of an NFL player and provide higher predictive power. For example, I would have wanted to include variables that represent a player's opportunity to play in a game (e.g., playing time per game, number of injured players in the depth chart, etc.). 
 
