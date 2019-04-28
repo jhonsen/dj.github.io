@@ -41,8 +41,14 @@ very good, good, fair, or poor?"_
 
 To have models with high interpretability and predictive power, I used `Logistic Regression` (LR) and `Random Forest` (RF) classifier, respectively. I setup a pipeline that ran feature scaling and 10-fold cross-validation (CV) on each of the two classifiers. This pipleline was used for the _training set_, to get the best set of hyperparameters. Once, grid-searching was completed, the optimized models were used to make predictions on the _test set_. 
 
-For the app deployment, the entire dataset was used for training. The trained model was embedded in a Python `Flask` app, which utilizes `d3.js` sliders as input method. Visit this [page](https://obesity-predictor.herokuapp.com/) for deployed app.
+For the app deployment, the entire dataset was used for training. The trained model was embedded in a Python `Flask` app, which utilizes `d3.js` sliders as input method. 
+
+
  ![Figure0]({{site.url}}/images/shortervid.gif)
+
+**Checkout this web app**,  [here](https://obesity-predictor.herokuapp.com/).   
+
+  
 
 **Performance Evaluation**. In general, the performance of Logistic Regression (LR) is comparable with that of Random Forest (RF) classfier (**Figure 1**). The LR model has a slightly higher <u>accuracy</u> than RF. However, the <u>recall score</u> for RF is better than that of LR. The latter is of great importance in healthcare, as <u>it would be costly to misclassify someone who has an obesity-related disease as healthy</u>. That was the reason I chose Random Forest Classifier as the best model to use for deployment.
    ![Figure1]({{site.url}}/images/GridoptimizedModels.png)
