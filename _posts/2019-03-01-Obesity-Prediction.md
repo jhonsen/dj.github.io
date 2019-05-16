@@ -10,7 +10,7 @@ title: What Life Changes Can We Make Today To Avoid Obesity?
 
 ### Introduction
 
-This project was completed on my fifth week at Metis [data science bootcamp](https://www.thisismetis.com/data-science-bootcamps). The learning objectives for this project include building a supervised learning (classification) model and deploying its product on a web app. So, I decided to choose a topic that was dear to me, **_the obesity pandemic in the US._** 
+This project was completed during my fifth week at Metis [data science bootcamp](https://www.thisismetis.com/data-science-bootcamps). The learning objectives for this project were building a supervised learning (classification) model and deploying its product on a web app. I chose a topic that was dear to me, **_the obesity pandemic in the US._** 
 
 According to the [CDC](https://www.cdc.gov/nchs/fastats/leading-causes-of-death.htm), obesity-related diseases are the leading causes of death in the United States. People who are obese have higher chances of developing [heart disease, hypertension, stroke, and even (some) cancers](https://medlineplus.gov/ency/patientinstructions/000348.htm). With these statistics, I  wondered: _How much is the rise of obesity-related diseases influenced by our lifestyle? How does our (seemingly harmless) habit of snacking or dining out affect our chances of becoming obese? What is the impact of physical exercise, or its lack thereof, on our weight and overall health?_
 
@@ -19,29 +19,29 @@ According to the [CDC](https://www.cdc.gov/nchs/fastats/leading-causes-of-death.
 
 To assess the health impacts of eating and exercise habits, I decided to build a classification model that is trained on a subset of _American Time Use Survey (ATUS) Eating & Health Module Microdata Files_, collected by the [Bureau of Labor Statistics](https://www.bls.gov/tus/ehdatafiles.htm) (also featured in [Kaggle](https://www.kaggle.com/bls/eating-health-module-dataset)).
 
-This dataset represents the result of multi-year surveys that were performed from 2006 to 2008 and from 2014 to 2016; they contain ~11,000 observations of 39 topics/questions related to weekly eating habits and other lifestyle choices. The surveyees' information, e.g., weight and body-mass-index (BMI), were also included in the dataset. Among these, I chose  **BMI** as the _TARGET_ value to predict. According to [CDC](https://www.cdc.gov/obesity/adult/defining.html), people with **BMI>30** were classified as _**obese**_, whereas others with **BMI<30** were considered _**not obese**_. The ratio of obese and not obese was 72%:28%, an imbalanced class situation.  
+This dataset represents multi-year surveys that were conducted from 2006 to 2008 and from 2014 to 2016; It contains ~11,000 observations with 39 topics/questions related to weekly eating habits and other lifestyle choices. I chose body mass index (**BMI**) as the _TARGET_ value to predict. According to [CDC](https://www.cdc.gov/obesity/adult/defining.html), people with **BMI>30** are classified as _**obese**_, whereas others with **BMI<30** are considered _**not obese**_. The ratio of obese and not obese was 72%:28%, an imbalanced class situation.  
 
-To resolve this imbalance scenario, I split the dataset into training (80%) and test sets (20%) with stratification that reflects the 'original' proportion. Then, I used random-oversampling (ROS) method from `imblearn` to obtain a balanced training set of _**obese**_ and _**not obese**_ classes, i.e.,  ~6,000 observations of each class. 
+**Splitting the dataset.** I split the dataset into training (80%) and testing (20%) sets for model learning and evaluation, respectively. To reflect the 'original' imbalance scenario, I split the data using sklearn's stratification feature. Then, I used random-oversampling (ROS) method from `imblearn` to obtain a balanced training set of _**obese**_ and _**not obese**_ classes, i.e.,  ~6,000 observations of each class. 
 
-Of the 39 survey questions, I decided to use five of them as _FEATURES_ for my model (described below). I chose the five based on two reasons:
-- First, I wanted a straight-forward & simple design for the app's end-user. I.e., I didn't to require users to input many (private) information about themselves 
-- Random Forest Classifier (described below) had identified the five most important features in the model
+Of the 39 survey questions, I decided to use five as my model _FEATURES_ for my model for two reasons:
+- From an end-user perspective, I wanted a simple app that requires the user to input only a few types of health data 
+- The five features were considered most important by Random Forest Classifier 
 
 Here are the five features:
-- **TimeEat**, NUMERIC Feature. Original question:_"What is the total time (minutes) spent eating and drinking (primary meals during the day)?"_ 
-- **TimeSnack**, NUMERIC Feature. Original question: _"What is the total time (minutes) spent eating and drinking (primary meals during the day)?"_ 
-- **ExerciseFrequency**, Feature. Original question:_"During the past 7 days, how many times did you participate in any physical activities or exercises for fitness and health such as running, bicycling, working out in a gym, walking for exercise, or playing sports?"_ 
-- **FastFoodFrequency**, NUMERIC Feature. Original question:_"How many times in the last 7 days did you purchase: prepared food
+- **TimeEat**, NUMERIC feature representing the original survey question of _"What is the total time (minutes) spent eating and drinking (primary meals during the day)?"_ 
+- **TimeSnack**, NUMERIC feature representing the original survey question of _"What is the total time (minutes) spent eating and drinking (primary meals during the day)?"_ 
+- **ExerciseFrequency**, NUMERIC feature representing the original survey question of_"During the past 7 days, how many times did you participate in any physical activities or exercises for fitness and health such as running, bicycling, working out in a gym, walking for exercise, or playing sports?"_ 
+- **FastFoodFrequency**, NUMERIC feature representing the original survey question of _"How many times in the last 7 days did you purchase: prepared food
 from a deli, carry-out, delivery food, or fast food?"_ 
-- **GeneralHealth**, CATEGORICAL Feature. Original question:_"In general, would you say that your physical health was excellent,
+- **GeneralHealth**, CATEGORICAL feature representing the original survey question of_"In general, would you say that your physical health was excellent,
 very good, good, fair, or poor?"_ 
   
 
 ### Building Classification Models and Their Classification Results
 
-To have models with high interpretability and predictive power, I used `Logistic Regression` (LR) and `Random Forest` (RF) classifier, respectively. I setup a pipeline that ran feature scaling and 10-fold cross-validation (CV) on each of the two classifiers. This pipleline was used for the _training set_, to get the best set of hyperparameters. Once, grid-searching was completed, the optimized models were used to make predictions on the _test set_. 
+To consider models with high interpretability and predictive power, I examined `Logistic Regression` (LR) and `Random Forest` (RF) classifiers, respectively. I setup a pipeline that ran feature scaling and 10-fold cross-validation (CV) on each of the two classifiers. Grid-searching was also performed to find the best hyper-parameters. Finally, model performance was asessed using the (unseen) _test set_. 
 
-For the app deployment, the entire dataset was used for training. The trained model was embedded in a Python `Flask` app, which utilizes `d3.js` sliders as input method. 
+For the purpose of app deployment, the entire dataset was used for training. The trained model was embedded in a Python `Flask` app, which utilizes `d3.js` sliders as input method. 
 
 
  ![Figure0]({{site.url}}/images/shortervid.gif)
@@ -50,7 +50,7 @@ For the app deployment, the entire dataset was used for training. The trained mo
 
   
 
-**Performance Evaluation**. In general, the performance of Logistic Regression (LR) is comparable with that of Random Forest (RF) classfier (**Figure 1**). The LR model has a slightly higher <u>accuracy</u> than RF. However, the <u>recall score</u> for RF is better than that of LR. The latter is of great importance in healthcare, as <u>it would be costly to misclassify someone who has an obesity-related disease as healthy</u>. That was the reason I chose Random Forest Classifier as the best model to use for deployment.
+**Performance Evaluation**. In general, the performance of Logistic Regression (LR) is comparable with that of Random Forest (RF) classfier (**Figure 1**). The LR model has a slightly higher <u>accuracy</u> than RF. However, the <u>recall score</u> for RF is better than that of LR. The latter is of great importance in healthcare, as <u>it would be costly to misclassify someone who has an obesity-related disease as healthy</u>. For this reason, I chose Random Forest as the classifier used in app deployment.
    ![Figure1]({{site.url}}/images/GridoptimizedModels.png)
 
   **Figure 1**. Performance of Logistic Regression and Random Forest classifiers on the training set. Hyper-parameters used in each model were optimezed using grid-search-CV. *Left*, the accuracy of each model was computed with 10-fold CV. *Right*, recall score was also obtained with 10-fold cross-validation. Jittered points on box-and-whiskers reflect scores for each of the ten folds.      
@@ -67,7 +67,7 @@ Higher <u>recall</u> score in the RF classifier means that we are better at dete
 
   **Figure 3**. Confusion matrices for LR and RF classifiers. These diagrams were generated using true and predicted target values of the test set.  
 
-**Recovering Model Interpretability**. Although the RF classifier is known to be a robust model with high predictive power, it is a "black-box"-like model due to its low interpretability. To recover some of this aspect, I decided to use Local Interpretable Model-agnostic Explainer ([LIME]((https://github.com/marcotcr/lime))). This package allows us to investigate the effect of feature-variation on the prediction result. For instance, a given individual is predicted to be obese by the RF classifier, with  P(obese) of 0.59 (*left* of **Figure 4**). We could calculate how the P(obese) changes with the increase of a particular feature, or a combination of features. For this subject, the individual did not participate in any type of exercises, i.e. **0** *exerciseFrequency* (*right*). However, if a physician were to suggest an exercise plan for this individual, just by including 4 times a week (i.e., increasing *exerciseFrequency* from **0** to **4**), then the P(obese) would decrease to 0.56, indicating that this person would have lower chances of becoming obese. This type of calculation can be performed for each feature, or any combinations of features, at any increments. LIME outputs the overall effect of feature changes on the prediction probabilities  (*middle* of figure). 
+**Recovering Model Interpretability**. Although the RF classifier is known to be a robust model with high predictive power, it is a "black-box"-like model due to its low interpretability. To recover some of this aspect, I decided to use Local Interpretable Model-agnostic Explainer ([LIME]((https://github.com/marcotcr/lime))). This package allows us to investigate the effect of feature-variation on the prediction result. For instance, a given individual is predicted to be obese by the RF classifier, with  P(obese) of 0.59 (*left* of **Figure 4**). We could calculate how the P(obese) changes with the increase of a particular feature, or a combination of features. For this subject, the individual did not participate in any type of exercises, i.e. **0** *exerciseFrequency* (*right*). However, if a physician were to suggest an exercise plan for this individual, such as suggesting 4 exercises a week (i.e., increasing *exerciseFrequency* from **0** to **4**), then the P(obese) would decrease to 0.56, indicating that this person would have lower chances of becoming obese. This type of calculation can be performed for each feature, or any combinations of features, at any increments. LIME outputs the overall effect of feature changes on the prediction probabilities  (*middle* of figure). 
 
   ![Fig4]({{site.url}}/images/LIME.png)
 

@@ -8,7 +8,7 @@ title: What Should I Cook Tonight?
 
 ### Introduction
 
-Have you ever looked at the vegetables in your refrigerator and wondered, "What can I cook with these?" 
+Have you ever looked at the vegetables in your refrigerator and wondered, "*What can I cook with these?*" 
 
 I find myself asking this question almost every week. I could spend ~30 minutes Google-searching and website-browsing, to find one recipe that matches stuff I have in the refrigerator and my cooking preferrences. In the past, I had explored a couple of cooking (phone) apps to help me find recipes. However, I kinda felt that most available apps had too many functionalties to navigate through, e.g., typing-in the ingredient keywords, choosing the dish types & cuisine types, and selecting a handful of other preferrences. Also, they didn't yet have a way to find recipes simply by taking pictures of the ingredients. 
 
@@ -40,9 +40,9 @@ The following figure illustrates my project design and the technology stack I us
 
 ### Part I. Data acquisition and pre-processing
 
-**Collecting images**. Using `google-image-download` API, I collected 300 images for 15 different vegetable types (a total of ~4500 images). Then, I manually inspected each image to make sure that I acquired the right type of produce. For instance, I wanted to make sure that I collected photos of (raw) potatoes, not _mashed potatoes_, often included in the search process. I also removed duplicate images from each collection of produce. 
+**Collecting images**. Using `google-image-download` API, I collected 300 images for 15 different vegetable types (a total of ~4500 images). Then, I manually inspected each image to make sure that I acquired the right type of produce. For instance, I wanted to make sure that I collected photos of (raw) tomatoes, not _tomato puree_, often included in the search process. I also removed duplicate images from each collection of produce. 
 
-**Splitting dataset**. After removing duplicates and unrelated images, I found that some collections had fewer than 100 images. So I excluded these smaller collections from the library. Afterwards, 12 classes of vegetables remained, and each class had at least 120 images. For each class, twenty images were put aside as a *test set*, and the remainder 100 images were used as the *training set*. In other words, my model would learn how to classify each type of produce from 100 images, and it will make guesses on 20 'unseen' images to measure its accuracy.
+**Splitting dataset**. After removing duplicates and unrelated images, I found that some collections had fewer than 100 images. So I excluded these smaller collections from the library. Afterwards, only 12 classes of vegetables remained, and each class had at least 120 images.  My model would learn how to classify each type of produce from 100 images (training set), and it will make guesses on 20 'unseen' images to measure its accuracy (test set).
   
 The figure below shows the 12 different classes of produce, used for model training. These vegetables include *bean sprouts, scallion, basil, asparagus, mushroom, brussels sprouts, eggplant, bell pepper, bok choy, broccoli, carrot, eggplant, and tomato*. These vegetables happen to be some of my favorite ingredients to cook with. So, I'd most likely have them readily available in my refrigerator, when the time comes to test my app (live demo). 
 
@@ -59,7 +59,7 @@ The figure below shows the 12 different classes of produce, used for model train
 
 ### Part II. Building an image classifier and modeling recipe topics    
 
-**Building an image classifier**. As I only had 3 weeks to complete this project, I chose to use transfer learning to classify produce images. I used some of the popular convolutional neural network (CNN) architectures as the base layer and trained the top layer with produce images in the training set. I also wrote a Python script that runs a grid-search to find the best combination of model parameters. The result indicates that the best combination uses *MobileNetV2*, *rmsprop* optimizer and *softmax* activation function. 
+**Building an image classifier**. As I only had 3 weeks to complete this project, I chose to use transfer learning to classify produce images. I used some of the popular convolutional neural network (CNN) architectures as the base layer and trained the top layer with produce images in the training set. I also wrote a Python script that ran a grid-search to find the best combination of model parameters. The result indicates that the best combination uses *MobileNetV2*, *rmsprop* optimizer and *softmax* activation function. 
 
 Google's [MobileNet_V2 architecture](https://ai.googleblog.com/2018/04/mobilenetv2-next-generation-of-on.html) was chosen as the base layer, as it is robust and light for mobile application. This base layer was connected to a fully connected layer with *softmax* function to classify different types of vegetables in my library. With this setup, I was able to get ~96% accuracy on my test set. In other words, my model performed really well, as it classified *unseen* images correctly about 19 times out of 20 images.  The output of my image classifier is in the form of text format, which is used as keyword search against my recipe documents (described next).
 
@@ -67,7 +67,7 @@ Google's [MobileNet_V2 architecture](https://ai.googleblog.com/2018/04/mobilenet
 
 ![Fig3]({{site.url}}/images/Project4_keywords.png)
 
-**Designing the product with an end-user perspective**. Having to choose 20 categories of recipes may be too much of a hassle. So, I wanted to simplify my recipe selection with fewer categories. I reduced the 20 topics down to (only) 5, by grouping similar themes together. For instance, *cakes* (Topic-4), *ice cream* (Topic-5), and other related sweets (Topic-8, -10, and -20) could be combined into one major group called *dessert*. The final 5 categories are *main dish*, *side dish*, *salad*, *dessert*, and *condiments*. 
+**Designing a product with an end-user perspective**. Having to choose 20 categories of recipes may be too much of a hassle. So, I wanted to simplify my recipe selection with fewer categories. I reduced the 20 topics down to (only) 5, by grouping similar themes together. For instance, *cakes* (Topic-4), *ice cream* (Topic-5), and other related sweets (Topic-8, -10, and -20) could be combined into one major group called *dessert*. The final 5 categories are *main dish*, *side dish*, *salad*, *dessert*, and *condiments*. 
 
 **Building a Flask app for my phone**. I created a Flask app that was accessed locally (*public version coming soon*). To run the app on my cellphone, I needed to take 3 photos, and email them to produce2recipe@yahoo.com. To get the result of image classification and matched recipes, I tunneled into this app (running on my local machine) with `ngrok` and my phone browser (see below for explanation of how I created a workflow to live-demo this phone app).  
 
