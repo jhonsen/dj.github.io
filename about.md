@@ -6,13 +6,16 @@ title: About
 <!-- <p class="message"> -->
 Welcome!   
   
-This is my story of entering the world of DATA.
+This is the story of my journey into the world of AI.
   
-I am data scientist with a background in chemistry research. I was trained in both experimental and computational techniques, to solve molecular structures and infer their functions. As an experimentalist, I examined protein structures using solid-state nuclear magnetic resonance spectroscopy (a branch of analytical techniques that deals with extracting signals from noise). As a computational chemist, I built molecular models of those proteins and simulated their behaviors using packages that run on Linux clusters and supercomputers. These data-driven research eventually led me to the world of data science (DS) and machine learning (ML).  
+I am data scientist with a background in chemistry research. As a chemist, I employed both experimental and computational techniques to solve protein structures and infer their functions. As an experimentalist, I studied protein structures using solid-state nuclear magnetic resonance spectroscopy (a branch of physics & chemistry that deals with deciphering select electromagnetic signals). As a computational chemist, I built molecular models of proteins and simulated their behaviors using supercomputers (high-performance computing centers). These data-driven research eventually led me to the world of data science (DS) and machine learning (ML).  
   
-After graduate school, I decided to hone my skills in coding & data analysis by attending a (fulltime) 12-week DS bootcamp in Seattle, i.e., METIS. At the bootcamp, I completed five end-to-end projects that focused on real-world business problems that intersect multiple industries, e.g., healthcare, marketing, sports analytics. 
-  
-Currently, I'm in pursue of a _data engineering_ nanodegree (via UDACITY), to support my adventures through this exciting world of DATA.
+After my post-doctoral work, I decided to hone my skills in coding & data analysis by attending a (fulltime) 12-week DS bootcamp in Seattle, [METIS](https://www.thisismetis.com/). At the bootcamp, I completed multiple end-to-end data science projects, focusing on business problems that intersect various industries, e.g., healthcare, marketing, sports analytics. 
+
+I love building and productionizing machine learning and AI. This interest led me to taking up a role as a Conversational Data Specialist with the Semantic Machines team at Microsoft,  
+ [![Microsoft's newest Coversational AI](http://img.youtube.com/vi/G_v5B_gYceM/0.jpg)](http://www.youtube.com/watch?v=G_v5B_gYceM "Microsoft's Conversational AI")
+
+_Excited and looking forward to whatever comes next!_
 
 <!-- </p> -->
 
